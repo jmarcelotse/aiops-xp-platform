@@ -101,7 +101,66 @@ flowchart TB
     linkStyle 1 stroke:#d9d9d9,stroke-width:2px;
     linkStyle 2 stroke:#d9d9d9,stroke-width:2px;
 ```
-
+```
 Analise o projeto /home/jmarcelotse/devops/aiops-xp-platform/encontros-tech e me diga qual é a stack do projeto. Como faço para executar localmente e quais sao os principais recursos
 
 Detalhe mais o modelo da dados da aplicação
+```
+## Arquitetura MCP
+
+```mermaid
+flowchart TB
+    subgraph AI["🤖 Ferramentas IA"]
+        direction LR
+        G["Gemini CLI"]
+        C["Claude Code"]
+    end
+
+    subgraph MCP["📡 Protocolo MCP"]
+        direction TB
+        J["JSON-RPC 2.0"]
+    end
+
+    subgraph SERVERS["⚙️ MCP Servers"]
+        direction LR
+        F["📁 Filesystem"]
+        GH["👩‍💻 GitHub"]
+        K["☸️ Kubernetes"]
+    end
+
+    subgraph SYS["🎯 Sistemas"]
+        direction LR
+        A["Arquivos"]
+        R["Repositórios"]
+        CL["Clusters"]
+    end
+
+    G --> J
+    C --> J
+    J --> F
+    J --> GH
+    J --> K
+    F --> A
+    GH --> R
+    K --> CL
+```
+## Arquitetura Host-Client-Server
+
+```mermaid
+flowchart TB
+    H["🖥️ Host<br/>Gemini CLI"]
+    C["🔗 MCP Client"]
+    S["⚙️ MCP Server<br/>Kubernetes"]
+
+    H --> C --> S
+
+    classDef host fill:#123047,stroke:#5aa9ff,stroke-width:2px,color:#ffffff;
+    classDef client fill:#3a2208,stroke:#ff8a1c,stroke-width:2px,color:#ffffff;
+    classDef server fill:#17361f,stroke:#5ad67d,stroke-width:2px,color:#ffffff;
+
+    class H host;
+    class C client;
+    class S server;
+
+    linkStyle 0 stroke:#d9d9d9,stroke-width:2px;
+    linkStyle 1 stroke:#d9d9d9,stroke-width:2px;
